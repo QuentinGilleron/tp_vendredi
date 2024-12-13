@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 # Inventaire de Noël
 inventaire = [
     {"nom": "Boules de Noël", "quantite": 50, "prix": 1.5},
@@ -6,110 +9,97 @@ inventaire = [
     {"nom": "Cassoulet de Noël", "quantite": 5, "prix": 8.5}
 ]
 
-# Affichage de l'inventaire
-def afficher_inventaire(inventaire):
+def afficher_inventaire():
+    output.delete(1.0, tk.END)
     for produit in inventaire:
-        print(f"| {produit['nom']} - {produit['quantite']} unités - {produit['prix']} €")
+        output.insert(tk.END, f"| {produit['nom']} - {produit['quantite']} unités - {produit['prix']} €\n")
 
+def ajouter_produit():
+    nom = entry_nom.get()
+    quantite = entry_quantite.get()
+    prix = entry_prix.get()
+    
+    if not nom or not quantite or not prix:
+        messagebox.showwarning("Erreur", "Veuillez remplir tous les champs.")
+        return
 
-# Ajout d'un produit
-def ajouter_produit(inventaire, nom, quantite, prix):
+    quantite = int(quantite)
+    prix = float(prix)
+
     for produit in inventaire:
         if produit["nom"] == nom:
             produit["quantite"] += quantite
-            return inventaire
-    inventaire.append({"nom": nom, "quantite": quantite, "prix": prix})
-    return inventaire
+            afficher_inventaire()
+            return
 
-# Suppression d'un produit
-def supprimer_produit(inventaire, nom):
+    inventaire.append({"nom": nom, "quantite": quantite, "prix": prix})
+    afficher_inventaire()
+
+def supprimer_produit():
+    nom = entry_nom.get()
     for produit in inventaire:
         if produit["nom"] == nom:
             inventaire.remove(produit)
-            print(f"Le produit {nom} a été supprimé.")
-            return inventaire
-    print("Le produit n'existe pas.")
-    return inventaire
+            afficher_inventaire()
+            return
+    messagebox.showwarning("Erreur", "Produit introuvable.")
 
+def modifier_quantite():
+    nom = entry_nom.get()
+    quantite = entry_quantite.get()
 
-# Modification de la quantité d'un produit
-def modifier_quantite(inventaire, nom, quantite):
+    if not nom or not quantite:
+        messagebox.showwarning("Erreur", "Veuillez remplir les champs nom et quantite.")
+        return
+
+    quantite = int(quantite)
+
     for produit in inventaire:
         if produit["nom"] == nom:
             produit["quantite"] = quantite
-            return inventaire
-    print("Le produit n'existe pas.")
-    return inventaire
-
-# Recherche d'un produit
-def rechercher_produit(inventaire, nom):
-    for produit in inventaire:
-        if produit["nom"] == nom:
-            print(f"| {produit['nom']} - {produit['quantite']} unités - {produit['prix']} €")
+            afficher_inventaire()
             return
-    print("Le produit n'existe pas.")
+    messagebox.showwarning("Erreur", "Produit introuvable.")
 
-# Calcul de la valeur totale de l'inventaire
-def valeur_totale_inventaire(inventaire):
-    total = 0
-    for produit in inventaire:
-        total += produit["quantite"] * produit["prix"]
-    return total
+def valeur_totale_inventaire():
+    total = sum(produit["quantite"] * produit["prix"] for produit in inventaire)
+    messagebox.showinfo("Valeur totale", f"Valeur totale de l'inventaire : {total:.2f} €")
 
+# Interface graphique
+root = tk.Tk()
+root.title("Inventaire de Noël")
 
-if __name__ == "__main__":
-    while True:
-        print(" ================ Menu principal ================= ")
-        print("| 1. Afficher l’inventaire.                       |")
-        print("| 2. Ajouter un produit.                          |")
-        print("| 3. Supprimer un produit.                        |")
-        print("| 4. Modifier la quantité d’un produit.           |")
-        print("| 5. Rechercher un produit.                       |")
-        print("| 6. Calculer la valeur totale de l’inventaire.   |")
-        print("| 7. Quitter le programme.                        |")
-        print(" ================================================= ")
-        print("")
-        choix = input(" Choix : ")
-        print("")
-        if choix == "1":
-            print(" ============== Inventaire ===============")
-            afficher_inventaire(inventaire)
-            print(" =========================================")
-        elif choix == "2":
-            print(" ============== Ajouter un produit ===============")
-            nom = input("Nom du produit : ")
-            quantite = int(input("Quantité : "))
-            prix = float(input("Prix : "))
-            inventaire = ajouter_produit(inventaire, nom, quantite, prix)
-            print(" ================================================")
-        elif choix == "3":
-            print(" ============== Supprimer un produit ===============")
-            afficher_inventaire(inventaire)
-            print("")
-            nom = input("Nom du produit : ")
-            inventaire = supprimer_produit(inventaire, nom)
-            print(" ==================================================")
-        elif choix == "4":
-            print(" ============== Modifier la quantité d'un produit ===============")
-            afficher_inventaire(inventaire)
-            print("")
-            nom = input("Nom du produit : ")
-            quantite = int(input("Nouvelle quantité : "))
-            inventaire = modifier_quantite(inventaire, nom, quantite)
-            print(" ===============================================================")
-        elif choix == "5":
-            print(" ============== Rechercher un produit ===============")
-            nom = input("Nom du produit : ")
-            rechercher_produit(inventaire, nom)
-            print(" ===================================================")
-        elif choix == "6":
-            print(" ============== Valeur totale de l'inventaire ===============")
-            print(f"Valeur totale : {valeur_totale_inventaire(inventaire)} €")
-            print(" =============================================================")
-        elif choix == "7":
-            break
-        else:
-            print("================================================")
-            print("Choix invalide.")
-            print("================================================")
-        print("")
+# Champs de saisie
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+tk.Label(frame, text="Nom du produit:").grid(row=0, column=0, padx=5, pady=5)
+entry_nom = tk.Entry(frame)
+entry_nom.grid(row=0, column=1, padx=5, pady=5)
+
+tk.Label(frame, text="Quantité:").grid(row=1, column=0, padx=5, pady=5)
+entry_quantite = tk.Entry(frame)
+entry_quantite.grid(row=1, column=1, padx=5, pady=5)
+
+tk.Label(frame, text="Prix:").grid(row=2, column=0, padx=5, pady=5)
+entry_prix = tk.Entry(frame)
+entry_prix.grid(row=2, column=1, padx=5, pady=5)
+
+# Zone d'affichage de l'inventaire
+output = tk.Text(root, width=50, height=15, wrap=tk.WORD)
+output.pack(pady=10)
+
+# Boutons d'action
+actions = tk.Frame(root)
+actions.pack(pady=10)
+
+tk.Button(actions, text="Afficher l'inventaire", command=afficher_inventaire).grid(row=0, column=0, padx=5, pady=5)
+tk.Button(actions, text="Ajouter", command=ajouter_produit).grid(row=0, column=1, padx=5, pady=5)
+tk.Button(actions, text="Supprimer", command=supprimer_produit).grid(row=0, column=2, padx=5, pady=5)
+tk.Button(actions, text="Modifier Quantité", command=modifier_quantite).grid(row=0, column=3, padx=5, pady=5)
+tk.Button(actions, text="Valeur Totale", command=valeur_totale_inventaire).grid(row=0, column=4, padx=5, pady=5)
+
+# Initialiser l'affichage de l'inventaire
+afficher_inventaire()
+
+root.mainloop()
