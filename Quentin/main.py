@@ -32,7 +32,6 @@ def creer_personnage(nom, classe, niveau):
         ]
     }
 
-personnage1 = creer_personnage("Quentin", "Guerrier", 1)
 personnage2 = creer_personnage("Ennemi", "Guerrier", 1)
 
 def ajouter_objet(personnage, objet):
@@ -155,6 +154,14 @@ def combat(personnage1, personnage2):
             choix = input("Que voulez-vous faire ? ")
 
 if __name__ == "__main__":
+
+    print ("======= Bienvenue dans le jeu de combat ! =========")
+    nom = input("Quel est votre nom ? ")
+    classe = input("Quelle est votre classe ? ")
+    niveau = 1
+    personnage1 = creer_personnage(nom, classe, niveau)
+    print("========================================")
+    space()
 
     menu()
     choix = input("Que voulez-vous faire ? ")
