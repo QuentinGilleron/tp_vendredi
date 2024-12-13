@@ -196,7 +196,3 @@ if __name__ == "__main__":
         
         menu()
         choix = input("Que voulez-vous faire ? ")
-        
-
-
-    
