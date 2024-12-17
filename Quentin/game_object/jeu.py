@@ -34,12 +34,18 @@ def main():
         choix = input("Votre choix : ")
 
         if choix == "1":
+            print("")
             nom = input("Quel est votre nom ? ")
             classe = input("Quelle est votre classe ? ")
+            print("")
             joueur = Personnage(nom, classe, niveau=1)
+            print("")
             joueur.sauvegarder()
+            print("")
             chargement()
-            print(f"| Personnage {joueur.nom} créé et sauvegardé.")
+            print("")
+            print("| Personnage créé")
+            print("")
             break  # Quitter la boucle après la création et la sauvegarde du personnage
 
         elif choix == "2":
@@ -48,8 +54,6 @@ def main():
             if fichiers_disponibles:
                 while True:  # Boucle pour demander un fichier jusqu'à ce qu'un fichier valide soit trouvé
                     fichier = input("Entrez le nom du joueur (ou le numéro) : ")
-                    # ajouter l'extension .json si elle n'est pas déjà présente
-                    
                     
                     if fichier.isdigit():
                         index = int(fichier) - 1  # Convertir l'input en index si c'est un numéro
@@ -59,15 +63,12 @@ def main():
                         else:
                             print("Numéro invalide.")
                     else:
-                        # Si ce n'est pas un numéro, on tente d'entrer directement le nom du fichier
+                        if not fichier.endswith(".json"):
+                            fichier += ".json"
                         if fichier in fichiers_disponibles:
                             break  # Sortir de la boucle si le fichier est valide
                         else:
                             print("| Fichier non trouvé. Veuillez réessayer.")
-
-
-                    if not fichier.endswith(".json"):
-                        fichier += ".json"
 
                 # Charger le personnage depuis le fichier choisi
                 try:
@@ -101,8 +102,6 @@ def main():
             print("")
 
 
-    ennemi = Personnage("Ennemi", "Guerrier", niveau=1)
-
     while True:
         afficher_menu_principal()
         choix = input("Que voulez-vous faire ? ")
@@ -114,12 +113,14 @@ def main():
         elif choix == "3":
             joueur.utiliser_potion_de_soin()
         elif choix == "4":
-            combat(joueur, ennemi)
+            combat(joueur)
         elif choix == "5":
+            print("")
             print("  ========================================")
             joueur.sauvegarder()
             print("| Merci d'avoir joué !")
             print("  ========================================")
+            print("")
             break
         else:
             print("Choix invalide !")

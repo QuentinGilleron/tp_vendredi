@@ -13,14 +13,27 @@ def afficher_menu_principal():
 
 def afficher_menu_combat():
     print("  ================== Menu ==================  ")
-    print("| 1. Attaquer                              |")
-    print("| 2. Utiliser une potion de soin           |")
-    print("| 3. Fuir                                  |")
-    print("  ========================================  ")
+    print("| 1. Attaquer                                |")
+    print("| 2. Stat de combat                          |")
+    print("| 3. Utiliser une potion de soin             |")
+    print("| 0. Fuir                                    |")
+    print("  ==========================================  ")
 
 def espace():
     for _ in range(3):
         print()
+
+def choix_adversaire():
+    print("")
+    print("  ================== Qui affronter ? ==================  ")
+    print("| 1. Rat (Facile)                                       |")
+    print("| 2. Gobelin (Moyen)                                    |")
+    print("| 3. Ogre (Difficile)                                   |")
+    print("| 4. Titan (Très difficile)                             |")
+    print("| 5. Démons (Boss final)                                |")
+    print("| 0. Retourner au menu principal                        |")
+    print("  =====================================================  ")
+    print("")
 
 def chargement():
 

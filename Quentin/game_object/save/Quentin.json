@@ -1,0 +1,18 @@
+{
+    "nom": "Quentin",
+    "classe": "zob",
+    "niveau": 17,
+    "points_de_vie": 225,
+    "inventaire": {
+        "objets": [
+            {
+                "nom": "potion de soin",
+                "quantit\u00e9": 5
+            },
+            {
+                "nom": "Crane de d\u00e9mon",
+                "quantit\u00e9": 1
+            }
+        ]
+    }
+}
