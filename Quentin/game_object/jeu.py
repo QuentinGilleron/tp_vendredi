@@ -21,7 +21,7 @@ def afficher_sauvegardes():
             print(f"| {i}. {fichier[:-5]}")
         print("")
     else:
-        print("Aucune sauvegarde disponible.")
+        print("")
 
     return fichiers_json
 
@@ -86,8 +86,8 @@ def main():
                 except FileNotFoundError:
                     print("| Erreur : Fichier introuvable. Veuillez réessayer.")
             else:
-                print("Aucune sauvegarde disponible. Retour au menu principal.")
-                break  # Retour au menu principal si aucune sauvegarde n'est trouvée
+                print("Aucune sauvegarde disponible")
+
         elif choix == "3":
             print("")
             print("  ========================================")
