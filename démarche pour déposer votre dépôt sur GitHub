@@ -1,0 +1,23 @@
+Créer un dépôt sur GitHub :
+
+Allez sur GitHub et connectez-vous.
+Cliquez sur le bouton "New" pour créer un nouveau dépôt.
+Donnez un nom à votre dépôt et ajoutez une description si vous le souhaitez.
+Cliquez sur "Create repository".
+Initialiser votre dépôt local :
+
+Ouvrez votre terminal ou invite de commande.
+Naviguez vers le répertoire de votre projet : cd chemin/vers/votre/projet.
+Initialisez un dépôt Git : git init.
+Ajouter vos fichiers :
+
+Ajoutez vos fichiers au dépôt : git add ..
+Faire un commit :
+
+Enregistrez vos modifications avec un message de commit : git commit -m "Premier commit".
+Lier votre dépôt local à GitHub :
+
+Ajoutez l'URL de votre dépôt GitHub comme remote : git remote add origin https://github.com/votre-utilisateur/votre-depot.git.
+Pousser vos modifications vers GitHub :
+
+Envoyez vos modifications : git push -u origin master.
