@@ -1,0 +1,14 @@
+{
+    "nom": "ohi",
+    "classe": "azd",
+    "niveau": 1,
+    "points_de_vie": 100,
+    "inventaire": {
+        "objets": [
+            {
+                "nom": "potion de soin",
+                "quantit\u00e9": 6
+            }
+        ]
+    }
+}
